@@ -1,4 +1,4 @@
-# Camera Distance-aware Top-down Approach for 3D Multi-person Pose Estimation from a Single RGB Image
+# PoseNet of "Camera Distance-aware Top-down Approach for 3D Multi-person Pose Estimation from a Single RGB Image"
 
 <p align="center">
 <img src="https://cv.snu.ac.kr/research/3DMPPE/figs/qualitative_intro.PNG" width="800" height="300">
