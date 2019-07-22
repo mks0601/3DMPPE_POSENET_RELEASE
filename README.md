@@ -1,7 +1,7 @@
 # 3DMPPE_POSENET_RELEASE
 
 <p align="center">
-<img src="https://cv.snu.ac.kr/research/3DMPPE/figs/qualitative_intro.PNG" width="800" height="250">
+<img src="https://cv.snu.ac.kr/research/3DMPPE/figs/qualitative_intro.PNG" width="800" height="300">
 </p>
 
 ## Introduction
