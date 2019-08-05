@@ -51,8 +51,8 @@ function draw_3Dpose_mupots()
     skeleton = transpose(reshape(skeleton,[2,16])) + 1;
 
     fp_img_name = fopen('../mupots_img_name.txt');
-    preds_2d_kpt = load('preds_2d_kpt.mat');
-    preds_3d_kpt = load('preds_3d_kpt.mat');
+    preds_2d_kpt = load('preds_2d_kpt_mupots.mat');
+    preds_3d_kpt = load('preds_3d_kpt_mupots.mat');
 
     img_name = fgetl(fp_img_name);
     while ischar(img_name)
