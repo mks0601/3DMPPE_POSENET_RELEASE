@@ -42,7 +42,7 @@ ${POSE_ROOT}
 `-- output
 ```
 * `data` contains data loading codes and soft links to images and annotations directories.
-* `cmoon` contains kernel codes for 3d multi-person pose estimation system.
+* `common` contains kernel codes for 3d multi-person pose estimation system.
 * `main` contains high-level codes for training or testing the network.
 * `vis` contains scripts for 3d visualization.
 * `output` contains log, trained models, visualized outputs, and test result.
