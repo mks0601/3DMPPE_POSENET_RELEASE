@@ -79,10 +79,10 @@ ${POSE_ROOT}
 |       |   |-- MultiPersonTestSet
 |       |   `-- MuPoTS-3D.json
 ```
-* Download Human3.6M parsed data [[images](https://cv.snu.ac.kr/research/3DMPPE/Human36M/images.zip)][[annotations](https://cv.snu.ac.kr/research/3DMPPE/Human36M/annotations.zip)]
-* Download MPII parsed data [[images](http://human-pose.mpi-inf.mpg.de/)][[annotations](https://cv.snu.ac.kr/research/3DMPPE/MPII/annotations.zip)]
-* Download MuCo parsed and composited data [[images_1](https://cv.snu.ac.kr/research/3DMPPE/MuCo/augmented.zip)][[images_2](https://cv.snu.ac.kr/research/3DMPPE/MuCo/unaugmented.zip)][[annotations](https://cv.snu.ac.kr/research/3DMPPE/MuCo/MuCo-3DHP.json)]
-* Download MuPoTS parsed parsed data [[images](http://gvv.mpi-inf.mpg.de/projects/SingleShotMultiPerson/)][[annotations](https://cv.snu.ac.kr/research/3DMPPE/MuPoTS/MuPoTS-3D.json)]
+* Download Human3.6M parsed data [[images](https://cv.snu.ac.kr/dataset/3DMPPE/Human36M/images.zip)][[annotations](https://cv.snu.ac.kr/dataset/3DMPPE/Human36M/annotations.zip)]
+* Download MPII parsed data [[images](http://human-pose.mpi-inf.mpg.de/)][[annotations](https://cv.snu.ac.kr/dataset/3DMPPE/MPII/annotations.zip)]
+* Download MuCo parsed and composited data [[images_1](https://cv.snu.ac.kr/dataset/3DMPPE/MuCo/augmented.zip)][[images_2](https://cv.snu.ac.kr/dataset/3DMPPE/MuCo/unaugmented.zip)][[annotations](https://cv.snu.ac.kr/dataset/3DMPPE/MuCo/MuCo-3DHP.json)]
+* Download MuPoTS parsed parsed data [[images](http://gvv.mpi-inf.mpg.de/projects/SingleShotMultiPerson/)][[annotations](https://cv.snu.ac.kr/dataset/3DMPPE/MuPoTS/MuPoTS-3D.json)]
 * All annotation files follow [MS COCO format](http://cocodataset.org/#format-data).
 * If you want to add your own dataset, you have to convert it to [MS COCO format](http://cocodataset.org/#format-data).
 ### Output
