@@ -141,6 +141,7 @@ For the evaluation, you can run `test.py` or there are evaluation codes in `Huma
 <p align="center">
 <img src="https://cv.snu.ac.kr/research/3DMPPE/figs/H36M_P1.png">
 </p>
+
 * Bounding box [[H36M_protocol1](https://cv.snu.ac.kr/research/3DMPPE/result/bbox/Human36M/Protocol1/bbox_human36m_output.json)]
 * PoseNet model trained on Human3.6M protocol 1 + MPII [[model](https://cv.snu.ac.kr/research/3DMPPE/model/PoseNet/human3.6m/p1/snapshot_24.pth.tar
 )]
@@ -149,6 +150,7 @@ For the evaluation, you can run `test.py` or there are evaluation codes in `Huma
 <p align="center">
 <img src="https://cv.snu.ac.kr/research/3DMPPE/figs/H36M_P2.png">
 </p>
+
 * Bounding box [[H36M_protocol2](https://cv.snu.ac.kr/research/3DMPPE/result/bbox/Human36M/Protocol2/bbox_human36m_output.json)]
 * PoseNet model trained on Human3.6M protocol 2+ MPII [[model](https://cv.snu.ac.kr/research/3DMPPE/model/PoseNet/human3.6m/p2/snapshot24.pth.tar
 )]
@@ -158,6 +160,7 @@ For the evaluation, run `test.py`.  After that, move `data/MuPoTS/mpii_mupots_mu
 <p align="center">
 <img src="https://cv.snu.ac.kr/research/3DMPPE/figs/MuPoTS.png">
 </p>
+
 * Bounding box [[MuPoTS-3D](https://cv.snu.ac.kr/research/3DMPPE/result/bbox/MuPoTS-3D/bbox_mupots_output.json)]
 * PoseNet model trained on MuCO-3DHP + MSCOCO [[model](https://cv.snu.ac.kr/research/3DMPPE/model/PoseNet/muco/snapshot_24.pth.tar
 )]
