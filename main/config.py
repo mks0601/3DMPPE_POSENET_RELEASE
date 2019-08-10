@@ -10,7 +10,7 @@ class Config:
     # 3D: Human36M, MuCo
     # 2D: MSCOCO, MPII 
     # Note that list must consists of one 3D dataset (first element of the list) + several 2D datasets
-    trainset = ['Human36M','MPII']   
+    trainset = ['Human36M']   
 
     # testing set
     # Human36M, MuPoTS, MSCOCO
