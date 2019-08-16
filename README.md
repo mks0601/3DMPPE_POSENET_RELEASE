@@ -148,6 +148,7 @@ For the evaluation, you can run `test.py` or there are evaluation codes in `Huma
 </p>
 
 * Bounding box [[H36M_protocol1](https://cv.snu.ac.kr/research/3DMPPE/result/bbox/Human36M/Protocol1/bbox_human36m_output.json)]
+* Bounding box + 3D Human root coordinatees in camera space [[H36M_protocol1](https://cv.snu.ac.kr/research/3DMPPE/result/bbox_root/Human36M/Protocol1/bbox_root_human36m_output.json)][
 * PoseNet model trained on Human3.6M protocol 1 + MPII [[model](https://cv.snu.ac.kr/research/3DMPPE/model/PoseNet/human3.6m/p1/snapshot_24.pth.tar
 )]
 #### Human3.6M dataset using protocol 2
@@ -157,6 +158,7 @@ For the evaluation, you can run `test.py` or there are evaluation codes in `Huma
 </p>
 
 * Bounding box [[H36M_protocol2](https://cv.snu.ac.kr/research/3DMPPE/result/bbox/Human36M/Protocol2/bbox_human36m_output.json)]
+* Bounding box + 3D Human root coordinatees in camera space [[H36M_protocol2](https://cv.snu.ac.kr/research/3DMPPE/result/bbox_root/Human36M/Protocol2/bbox_root_human36m_output.json)]
 * PoseNet model trained on Human3.6M protocol 2+ MPII [[model](https://cv.snu.ac.kr/research/3DMPPE/model/PoseNet/human3.6m/p2/snapshot24.pth.tar
 )]
 
@@ -167,8 +169,14 @@ For the evaluation, run `test.py`.  After that, move `data/MuPoTS/mpii_mupots_mu
 </p>
 
 * Bounding box [[MuPoTS-3D](https://cv.snu.ac.kr/research/3DMPPE/result/bbox/MuPoTS-3D/bbox_mupots_output.json)]
+* Bounding box + 3D Human root coordinatees in camera space [[MuPoTS-3D](https://cv.snu.ac.kr/research/3DMPPE/result/bbox_root/MuPoTS-3D/bbox_root_mupots_output.json)]
 * PoseNet model trained on MuCO-3DHP + MSCOCO [[model](https://cv.snu.ac.kr/research/3DMPPE/model/PoseNet/muco/snapshot_24.pth.tar
 )]
+
+#### MSCOCO dataset
+
+We additionally provide estimated 3D human root coordinates in on the MSCOCO dataset. The coordinates are in 3D camera coordinate system, and focal lengths are set to 1500mm for both x and y axis. You can change focal length and corresponding distance using equation 2 or equation in supplementarial material of my [paper](https://arxiv.org/abs/1907.11346)
+* Bounding box + 3D Human root coordinates in camera space [[MSCOCO](https://cv.snu.ac.kr/research/3DMPPE/result/bbox_root/MSCOCO/bbox_root_coco_output.json)]
 
 ## Reference
   ```
