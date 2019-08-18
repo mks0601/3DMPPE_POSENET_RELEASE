@@ -133,7 +133,7 @@ Place trained model at the `output/model_dump/`.
 
 In the `main` folder, run 
 ```bash
-python test.py --gpu 0-1 --test_epoch 20
+python test.py --gpu 0-1 --test_epoch 24
 ```
 to test the network on the GPU 0,1 with 20th epoch trained model. `--gpu 0,1` can be used instead of `--gpu 0-1`.
 
