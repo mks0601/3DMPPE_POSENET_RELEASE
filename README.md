@@ -159,7 +159,7 @@ For the evaluation, you can run `test.py` or there are evaluation codes in `Huma
 
 * Bounding box [[H36M_protocol2](https://cv.snu.ac.kr/research/3DMPPE/result/bbox/Human36M/Protocol2/bbox_human36m_output.json)]
 * Bounding box + 3D Human root coordinatees in camera space [[H36M_protocol2](https://cv.snu.ac.kr/research/3DMPPE/result/bbox_root/Human36M/Protocol2/bbox_root_human36m_output.json)]
-* PoseNet model trained on Human3.6M protocol 2+ MPII [[model](https://cv.snu.ac.kr/research/3DMPPE/model/PoseNet/human3.6m/p2/snapshot24.pth.tar
+* PoseNet model trained on Human3.6M protocol 2+ MPII [[model](https://cv.snu.ac.kr/research/3DMPPE/model/PoseNet/human3.6m/p2/snapshot_24.pth.tar
 )]
 
 #### MuPoTS-3D dataset
