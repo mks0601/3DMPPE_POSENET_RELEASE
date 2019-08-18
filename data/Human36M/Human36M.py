@@ -206,4 +206,4 @@ class Human36M:
             json.dump(pred_save, f)
         print("Test result is saved at " + output_path)
 
-        calculate_score(output_path, self.annot_dir, self.subject_list)
+        calculate_score(output_path, self.annot_path, self.get_subject())
