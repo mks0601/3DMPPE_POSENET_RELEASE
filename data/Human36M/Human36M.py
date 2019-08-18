@@ -54,11 +54,11 @@ class Human36M:
 
         return subject
     
-    def add_thorax(self, joint_world):
-        thorax = (joint_world[self.lshoulder_idx, :] + joint_world[self.rshoulder_idx, :]) * 0.5
+    def add_thorax(self, joint_coord):
+        thorax = (joint_coord[self.lshoulder_idx, :] + joint_coord[self.rshoulder_idx, :]) * 0.5
         thorax = thorax.reshape((1, 3))
-        joint_world = np.concatenate((joint_world, thorax), axis=0)
-        return joint_world
+        joint_coord = np.concatenate((joint_coord, thorax), axis=0)
+        return joint_coord
 
     def load_data(self):
         subject_list = self.get_subject()
@@ -107,11 +107,8 @@ class Human36M:
             R,t,f,c = np.array(cam_param['R']), np.array(cam_param['t']), np.array(cam_param['f']), np.array(cam_param['c'])
                 
             # project world coordinate to cam, image coordinate space
-            joint_world = np.array(ann['keypoints_world'])
-            joint_world = self.add_thorax(joint_world)
-            joint_cam = np.zeros((self.joint_num,3))
-            for j in range(self.joint_num):
-                joint_cam[j] = world2cam(joint_world[j], R, t)
+            joint_cam = np.array(ann['keypoints_cam'])
+            joint_cam = self.add_thorax(joint_cam)
             joint_img = np.zeros((self.joint_num,3))
             joint_img[:,0], joint_img[:,1], joint_img[:,2] = cam2pixel(joint_cam, f, c)
             joint_img[:,2] = joint_img[:,2] - joint_cam[self.root_idx,2]
