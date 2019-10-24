@@ -11,7 +11,7 @@
 </p>
 
 <p align="middle">
-<img src="https://cv.snu.ac.kr/research/3DMPPE/figs/posetrack_1.gif" width="200" height="150"> <img src="https://cv.snu.ac.kr/research/3DMPPE/figs/posetrack_2.gif" width="200" height="150"><img src="https://cv.snu.ac.kr/research/3DMPPE/figs/posetrack_3.gif" width="200" height="150"><img src="https://cv.snu.ac.kr/research/3DMPPE/figs/posetrack_4.gif" width="200" height="150">
+<img src="https://cv.snu.ac.kr/research/3DMPPE/figs/posetrack_1_compressed.gif" width="200" height="150"> <img src="https://cv.snu.ac.kr/research/3DMPPE/figs/posetrack_2_compressed.gif" width="200" height="150"><img src="https://cv.snu.ac.kr/research/3DMPPE/figs/posetrack_3_compressed.gif" width="200" height="150"><img src="https://cv.snu.ac.kr/research/3DMPPE/figs/posetrack_4_compressed.gif" width="200" height="150">
 </p>
 
 
