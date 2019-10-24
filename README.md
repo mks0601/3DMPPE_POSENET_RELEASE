@@ -11,7 +11,7 @@
 </p>
 
 <p align="middle">
-<img src="https://cv.snu.ac.kr/research/3DMPPE/figs/video1.gif" width="400" height="300"> <img src="https://cv.snu.ac.kr/research/3DMPPE/figs/video2.gif" width="400" height="300">
+<img src="https://cv.snu.ac.kr/research/3DMPPE/figs/posetrack_1.gif" width="200" height="150"> <img src="https://cv.snu.ac.kr/research/3DMPPE/figs/posetrack_2.gif" width="200" height="150"><img src="https://cv.snu.ac.kr/research/3DMPPE/figs/posetrack_3.gif" width="200" height="150"><img src="https://cv.snu.ac.kr/research/3DMPPE/figs/posetrack_4.gif" width="200" height="150">
 </p>
 
 
@@ -189,4 +189,5 @@ We additionally provide estimated 3D human root coordinates in on the MSCOCO dat
   year = {2019}
 }
 ```
+
 
