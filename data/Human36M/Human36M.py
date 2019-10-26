@@ -169,8 +169,8 @@ class Human36M:
             gt_vis = gt['joint_vis']
             
             # restore coordinates to original space
-            pre_2d_kpt = preds[n].copy()
-            pre_2d_kpt[:,0], pre_2d_kpt[:,1], pre_2d_kpt[:,2] = warp_coord_to_original(pre_2d_kpt, bbox, gt_3d_root)
+            pred_2d_kpt = preds[n].copy()
+            pred_2d_kpt[:,0], pred_2d_kpt[:,1], pred_2d_kpt[:,2] = warp_coord_to_original(pred_2d_kpt, bbox, gt_3d_root)
             
             vis = False
             if vis:
@@ -178,14 +178,14 @@ class Human36M:
                 filename = str(random.randrange(1,500))
                 tmpimg = cvimg.copy().astype(np.uint8)
                 tmpkps = np.zeros((3,joint_num))
-                tmpkps[0,:], tmpkps[1,:] = pre_2d_kpt[:,0], pre_2d_kpt[:,1]
+                tmpkps[0,:], tmpkps[1,:] = pred_2d_kpt[:,0], pred_2d_kpt[:,1]
                 tmpkps[2,:] = 1
                 tmpimg = vis_keypoints(tmpimg, tmpkps, self.skeleton)
                 cv2.imwrite(filename + '_output.jpg', tmpimg)
 
             # back project to camera coordinate system
             pred_3d_kpt = np.zeros((joint_num,3))
-            pred_3d_kpt[:,0], pred_3d_kpt[:,1], pred_3d_kpt[:,2] = pixel2cam(pre_2d_kpt, f, c)
+            pred_3d_kpt[:,0], pred_3d_kpt[:,1], pred_3d_kpt[:,2] = pixel2cam(pred_2d_kpt, f, c)
 
             # root joint alignment
             pred_3d_kpt = pred_3d_kpt - pred_3d_kpt[self.root_idx]
