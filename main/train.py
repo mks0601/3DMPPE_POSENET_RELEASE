@@ -81,12 +81,10 @@ def main():
 
             # backward
             loss = loss_coord
-
             loss.backward()
             trainer.optimizer.step()
             
             trainer.gpu_timer.toc()
-
             screen = [
                 'Epoch %d/%d itr %d/%d:' % (epoch, cfg.end_epoch, itr, trainer.itr_per_epoch),
                 'lr: %g' % (trainer.get_lr()),
@@ -96,7 +94,6 @@ def main():
                 '%s: %.4f' % ('loss_coord', loss_coord.detach()),
                 ]
             trainer.logger.info(' '.join(screen))
-
             trainer.tot_timer.toc()
             trainer.tot_timer.tic()
             trainer.read_timer.tic()

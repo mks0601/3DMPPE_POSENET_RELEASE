@@ -8,7 +8,7 @@ import json
 import cv2
 import random
 import math
-from utils.pose_utils import pixel2cam, get_bbox, warp_coord_to_original
+from utils.pose_utils import pixel2cam, process_bbox
 from utils.vis import vis_keypoints, vis_3d_skeleton
 
 class MuPoTS:
@@ -60,34 +60,9 @@ class MuPoTS:
                 joint_img[:,2] = joint_img[:,2] - root_cam[2]
                 joint_vis = np.ones((self.original_joint_num,1))
 
-                bbox = np.array(ann['bbox'])
                 img_width, img_height = img['width'], img['height']
-
-                # sanitize bboxes
-                x, y, w, h = bbox
-                x1 = np.max((0, x))
-                y1 = np.max((0, y))
-                x2 = np.min((img_width - 1, x1 + np.max((0, w - 1))))
-                y2 = np.min((img_height - 1, y1 + np.max((0, h - 1))))
-                if w*h > 0 and x2 >= x1 and y2 >= y1:
-                    bbox = np.array([x1, y1, x2-x1, y2-y1])
-                else:
-                    continue
-
-                # aspect ratio preserving bbox
-                w = bbox[2]
-                h = bbox[3]
-                c_x = bbox[0] + w/2.
-                c_y = bbox[1] + h/2.
-                aspect_ratio = cfg.input_shape[1]/cfg.input_shape[0]
-                if w > aspect_ratio * h:
-                    h = w / aspect_ratio
-                elif w < aspect_ratio * h:
-                    w = h * aspect_ratio
-                bbox[2] = w*1.25
-                bbox[3] = h*1.25
-                bbox[0] = c_x - bbox[2]/2.
-                bbox[1] = c_y - bbox[3]/2.
+                bbox = process_bbox(bbox, img_width, img_height)
+                if bbox is None: continue
                 
                 data.append({
                     'img_path': img_path,
@@ -151,8 +126,10 @@ class MuPoTS:
             pred_2d_kpt = preds[n].copy()
             # only consider eval_joint
             pred_2d_kpt = np.take(pred_2d_kpt, self.eval_joint, axis=0)
-            pred_2d_kpt[:,0], pred_2d_kpt[:,1], pred_2d_kpt[:,2] = warp_coord_to_original(pred_2d_kpt, bbox, gt_3d_root)
-            
+            pred_2d_kpt[:,0] = pred_2d_kpt[:,0] / cfg.output_shape[1] * bbox[2] + bbox[0]
+            pred_2d_kpt[:,1] = pred_2d_kpt[:,1] / cfg.output_shape[0] * bbox[3] + bbox[1]
+            pred_2d_kpt[:,2] = (pred_2d_kpt[:,2] / cfg.depth_dim * 2 - 1) * (cfg.bbox_3d_shape[0]/2) + gt_3d_root[2]
+
             # 2d kpt save
             if img_name in pred_2d_save:
                 pred_2d_save[img_name].append(pred_2d_kpt[:,:2])
@@ -171,8 +148,7 @@ class MuPoTS:
                 cv2.imwrite(filename + '_output.jpg', tmpimg)
 
             # back project to camera coordinate system
-            pred_3d_kpt = np.zeros((joint_num,3))
-            pred_3d_kpt[:,0], pred_3d_kpt[:,1], pred_3d_kpt[:,2] = pixel2cam(pred_2d_kpt, f, c)
+            pred_3d_kpt = np.zeros((joint_num,3)) = pixel2cam(pred_2d_kpt, f, c)
             
             # 3d kpt save
             if img_name in pred_3d_save:
