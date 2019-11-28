@@ -131,6 +131,7 @@ class Human36M:
                 root_cam = bbox_root_result[str(image_id)]['root']
             else:
                 bbox = process_bbox(np.array(ann['bbox']), img_width, img_height)
+                if bbox is None: continue
                 root_cam = joint_cam[self.root_idx]
                
             data.append({
