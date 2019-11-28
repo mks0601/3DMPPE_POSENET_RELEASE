@@ -59,6 +59,7 @@ class MSCOCO:
                     continue
                 
                 bbox = process_bbox(ann['bbox'], width, height) 
+                if bbox is None: continue
 
                 # joints and vis
                 joint_img = np.array(ann['keypoints']).reshape(-1,3)
