@@ -14,6 +14,8 @@
 <img src="https://cv.snu.ac.kr/research/3DMPPE/figs/posetrack_1_comp.gif" width="200" height="150"> <img src="https://cv.snu.ac.kr/research/3DMPPE/figs/posetrack_2_comp.gif" width="200" height="150"><img src="https://cv.snu.ac.kr/research/3DMPPE/figs/posetrack_3_comp.gif" width="200" height="150"><img src="https://cv.snu.ac.kr/research/3DMPPE/figs/posetrack_4_comp.gif" width="200" height="150">
 </p>
 
+## News
+All download links are replaced with Google drive link. Sorry for slow and unstable previous links.
 
 ## Introduction
 
@@ -86,10 +88,10 @@ ${POSE_ROOT}
 |       |   |-- MultiPersonTestSet
 |       |   `-- MuPoTS-3D.json
 ```
-* Download Human3.6M parsed data [[images](https://cv.snu.ac.kr/dataset/3DMPPE/Human36M/images.zip)][[annotations](https://cv.snu.ac.kr/dataset/3DMPPE/Human36M/annotations.zip)]
-* Download MPII parsed data [[images](http://human-pose.mpi-inf.mpg.de/)][[annotations](https://cv.snu.ac.kr/dataset/3DMPPE/MPII/annotations.zip)]
-* Download MuCo parsed and composited data [[images_1](https://cv.snu.ac.kr/dataset/3DMPPE/MuCo/augmented.zip)][[images_2](https://cv.snu.ac.kr/dataset/3DMPPE/MuCo/unaugmented.zip)][[annotations](https://cv.snu.ac.kr/dataset/3DMPPE/MuCo/MuCo-3DHP.json)]
-* Download MuPoTS parsed parsed data [[images](http://gvv.mpi-inf.mpg.de/projects/SingleShotMultiPerson/)][[annotations](https://cv.snu.ac.kr/dataset/3DMPPE/MuPoTS/MuPoTS-3D.json)]
+* Download Human3.6M parsed data [[data](https://drive.google.com/drive/folders/1kgVH-GugrLoc9XyvP6nRoaFpw3TmM5xK?usp=sharing)]
+* Download MPII parsed data [[images](http://human-pose.mpi-inf.mpg.de/)][[annotations](https://drive.google.com/drive/folders/1MmQ2FRP0coxHGk0Ntj0JOGv9OxSNuCfK?usp=sharing)]
+* Download MuCo parsed and composited data [[data](https://drive.google.com/drive/folders/1yL2ey3aWHJnh8f_nhWP--IyC9krAPsQN?usp=sharing)]
+* Download MuPoTS parsed parsed data [[images](http://gvv.mpi-inf.mpg.de/projects/SingleShotMultiPerson/)][[annotations](https://drive.google.com/drive/folders/1WmfQ8UEj6nuamMfAdkxmrNcsQTrTfKK_?usp=sharing)]
 * All annotation files follow [MS COCO format](http://cocodataset.org/#format-data).
 * If you want to add your own dataset, you have to convert it to [MS COCO format](http://cocodataset.org/#format-data).
 ### Output
