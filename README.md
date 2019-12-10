@@ -142,7 +142,7 @@ python test.py --gpu 0-1 --test_epoch 20
 to test the network on the GPU 0,1 with 20th epoch trained model. `--gpu 0,1` can be used instead of `--gpu 0-1`.
 
 ## Results
-Here I report the performance of the PoseNet. Also, I provide pre-trained models of the PoseNetNet. Bounding box and root locations are obtained from DetectNet and RootNet. 
+Here I report the performance of the PoseNet. Also, you can download pre-trained models of the PoseNetNet in [here](https://drive.google.com/drive/folders/1UOfSrC2_PGkBXALP3pda5sYqRoG7eFxF?usp=sharing) and bounding boxs (from DetectNet) and root joint coordintates (from RootNet) of Human3.6M, MSCOCO, and MuPoTS-3D dataset in [here](https://drive.google.com/drive/folders/1oPugnYuxPnVSKtxpGQuzJKimhq7PtX_M?usp=sharing).
 
 
 #### Human3.6M dataset using protocol 1
@@ -151,20 +151,11 @@ For the evaluation, you can run `test.py` or there are evaluation codes in `Huma
 <img src="https://cv.snu.ac.kr/research/3DMPPE/figs/H36M_P1.png">
 </p>
 
-* Bounding box [[H36M_protocol1](https://cv.snu.ac.kr/research/3DMPPE/result/bbox/Human36M/Protocol1/bbox_human36m_output.json)]
-* Bounding box + 3D Human root coordinatees in camera space [[H36M_protocol1](https://cv.snu.ac.kr/research/3DMPPE/result/bbox_root/Human36M/Protocol1/bbox_root_human36m_output.json)]
-* PoseNet model trained on Human3.6M protocol 1 + MPII [[model](https://cv.snu.ac.kr/research/3DMPPE/model/PoseNet/human3.6m/p1/snapshot_24.pth.tar
-)]
 #### Human3.6M dataset using protocol 2
 For the evaluation, you can run `test.py` or there are evaluation codes in `Human36M`.
 <p align="center">
 <img src="https://cv.snu.ac.kr/research/3DMPPE/figs/H36M_P2.png">
 </p>
-
-* Bounding box [[H36M_protocol2](https://cv.snu.ac.kr/research/3DMPPE/result/bbox/Human36M/Protocol2/bbox_human36m_output.json)]
-* Bounding box + 3D Human root coordinatees in camera space [[H36M_protocol2](https://cv.snu.ac.kr/research/3DMPPE/result/bbox_root/Human36M/Protocol2/bbox_root_human36m_output.json)]
-* PoseNet model trained on Human3.6M protocol 2+ MPII [[model](https://cv.snu.ac.kr/research/3DMPPE/model/PoseNet/human3.6m/p2/snapshot_24.pth.tar
-)]
 
 #### MuPoTS-3D dataset
 For the evaluation, run `test.py`.  After that, move `data/MuPoTS/mpii_mupots_multiperson_eval.m` in `data/MuPoTS/data`. Also, move the test result files (`preds_2d_kpt_mupots.mat` and `preds_3d_kpt_mupots.mat`) in `data/MuPoTS/data`. Then run `mpii_mupots_multiperson_eval.m` with your evaluation mode arguments.
@@ -172,15 +163,9 @@ For the evaluation, run `test.py`.  After that, move `data/MuPoTS/mpii_mupots_mu
 <img src="https://cv.snu.ac.kr/research/3DMPPE/figs/MuPoTS.png">
 </p>
 
-* Bounding box [[MuPoTS-3D](https://cv.snu.ac.kr/research/3DMPPE/result/bbox/MuPoTS-3D/bbox_mupots_output.json)]
-* Bounding box + 3D Human root coordinatees in camera space [[MuPoTS-3D](https://cv.snu.ac.kr/research/3DMPPE/result/bbox_root/MuPoTS-3D/bbox_root_mupots_output.json)]
-* PoseNet model trained on MuCO-3DHP + MSCOCO [[model](https://cv.snu.ac.kr/research/3DMPPE/model/PoseNet/muco/snapshot_24.pth.tar
-)]
-
 #### MSCOCO dataset
 
-We additionally provide estimated 3D human root coordinates in on the MSCOCO dataset. The coordinates are in 3D camera coordinate system, and focal lengths are set to 1500mm for both x and y axis. You can change focal length and corresponding distance using equation 2 or equation in supplementarial material of my [paper](https://arxiv.org/abs/1907.11346)
-* Bounding box + 3D Human root coordinates in camera space [[MSCOCO](https://cv.snu.ac.kr/research/3DMPPE/result/bbox_root/MSCOCO/bbox_root_coco_output.json)]
+We additionally provide estimated 3D human root coordinates in on the MSCOCO dataset. The coordinates are in 3D camera coordinate system, and focal lengths are set to 1500mm for both x and y axis. You can change focal length and corresponding distance using equation 2 or equation in supplementarial material of my [paper](https://arxiv.org/abs/1907.11346).
 
 ## Reference
   ```
