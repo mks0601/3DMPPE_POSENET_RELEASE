@@ -148,7 +148,7 @@ class MuPoTS:
                 cv2.imwrite(filename + '_output.jpg', tmpimg)
 
             # back project to camera coordinate system
-            pred_3d_kpt = np.zeros((joint_num,3)) = pixel2cam(pred_2d_kpt, f, c)
+            pred_3d_kpt = pixel2cam(pred_2d_kpt, f, c)
             
             # 3d kpt save
             if img_name in pred_3d_save:
