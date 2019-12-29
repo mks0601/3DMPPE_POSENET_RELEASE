@@ -16,6 +16,13 @@
 
 ## News
 All download links are replaced with Google drive link. Sorry for slow and unstable previous links.
+If you have a problem with 'Download limit' problem when tried to download dataset from google drive link, please try this trick.
+```
+* Go the shared folder, which contains files you want to copy to your drive
+* Select all the files you want to copy
+* In the upper right corner click on three vertical dots and select “make a copy”
+* Then, the file is copied to your personal google drive account. You can download it from your personal account.
+```
 
 ## Introduction
 
