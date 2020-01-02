@@ -11,7 +11,7 @@ def parse_args():
     args = parser.parse_args()
 
     if not args.gpu_ids:
-        args.gpu_ids = str(np.argmin(mem_info()))
+        assert 0, print("Please set proper gpu ids")
 
     if '-' in args.gpu_ids:
         gpus = args.gpu_ids.split('-')
