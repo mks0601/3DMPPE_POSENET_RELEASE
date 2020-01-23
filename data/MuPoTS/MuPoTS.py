@@ -59,9 +59,10 @@ class MuPoTS:
                 joint_img = np.concatenate([joint_img, joint_cam[:,2:]],1)
                 joint_img[:,2] = joint_img[:,2] - root_cam[2]
                 joint_vis = np.ones((self.original_joint_num,1))
-
+                
+                bbox = np.array(ann['bbox'])
                 img_width, img_height = img['width'], img['height']
-                bbox = process_bbox(ann['bbox'], img_width, img_height)
+                bbox = process_bbox(bbox, img_width, img_height)
                 if bbox is None: continue
                 
                 data.append({
