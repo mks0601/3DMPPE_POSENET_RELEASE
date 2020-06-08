@@ -17,8 +17,8 @@ def pixel2cam(pixel_coord, f, c):
     cam_coord = np.concatenate((x[:,None], y[:,None], z[:,None]),1)
     return cam_coord
 
-def world2cam(world_coord, R, T):
-    cam_coord = np.dot(R, world_coord - T)
+def world2cam(world_coord, R, t):
+    cam_coord = np.dot(R, world_coord.transpose(1,0)).transpose(1,0) + t.reshape(1,3)
     return cam_coord
 
 def rigid_transform_3D(A, B):

@@ -121,7 +121,7 @@ class Human36M:
             action_idx = img['action_idx']; subaction_idx = img['subaction_idx']; frame_idx = img['frame_idx'];
             joint_world = np.array(joints[str(subject)][str(action_idx)][str(subaction_idx)][str(frame_idx)], dtype=np.float32)
             joint_world = self.add_thorax(joint_world)
-            joint_cam = world2cam(joint_world.transpose(1,0), R, t.reshape(3,1)).transpose(1,0)
+            joint_cam = world2cam(joint_world, R, t)
             joint_img = cam2pixel(joint_cam, f, c)
             joint_img[:,2] = joint_img[:,2] - joint_cam[self.root_idx,2]
             joint_vis = np.ones((self.joint_num,1))
