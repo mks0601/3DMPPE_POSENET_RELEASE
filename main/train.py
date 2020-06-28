@@ -40,42 +40,13 @@ def main():
         trainer.tot_timer.tic()
         trainer.read_timer.tic()
 
-        for itr in range(trainer.itr_per_epoch):
-            
-            input_img_list, joint_img_list, joint_vis_list, joints_have_depth_list = [], [], [], []
-            for i in range(len(cfg.trainset)):
-                try:
-                    input_img, joint_img, joint_vis, joints_have_depth = next(trainer.iterator[i])
-                except StopIteration:
-                    trainer.iterator[i] = iter(trainer.batch_generator[i])
-                    input_img, joint_img, joint_vis, joints_have_depth = next(trainer.iterator[i])
-
-                input_img_list.append(input_img)
-                joint_img_list.append(joint_img)
-                joint_vis_list.append(joint_vis)
-                joints_have_depth_list.append(joints_have_depth)
-            
-            # aggregate items from different datasets into one single batch
-            input_img = torch.cat(input_img_list,dim=0)
-            joint_img = torch.cat(joint_img_list,dim=0)
-            joint_vis = torch.cat(joint_vis_list,dim=0)
-            joints_have_depth = torch.cat(joints_have_depth_list,dim=0)
-            
-            # shuffle items from different datasets
-            rand_idx = []
-            for i in range(len(cfg.trainset)):
-                rand_idx.append(torch.arange(i,input_img.shape[0],len(cfg.trainset)))
-            rand_idx = torch.cat(rand_idx,dim=0)
-            rand_idx = rand_idx[torch.randperm(input_img.shape[0])]
-            input_img = input_img[rand_idx]; joint_img = joint_img[rand_idx]; joint_vis = joint_vis[rand_idx]; joints_have_depth = joints_have_depth[rand_idx];
-            target = {'coord': joint_img, 'vis': joint_vis, 'have_depth': joints_have_depth}
-
+        for itr, (input_img, joint_img, joint_vis, joints_have_depth) in enumerate(trainer.batch_generator):
             trainer.read_timer.toc()
             trainer.gpu_timer.tic()
 
-            trainer.optimizer.zero_grad()
-            
             # forward
+            trainer.optimizer.zero_grad()
+            target = {'coord': joint_img, 'vis': joint_vis, 'have_depth': joints_have_depth}
             loss_coord = trainer.model(input_img, target)
             loss_coord = loss_coord.mean()
 

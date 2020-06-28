@@ -229,5 +229,3 @@ def trans_point2d(pt_2d, trans):
     src_pt = np.array([pt_2d[0], pt_2d[1], 1.]).T
     dst_pt = np.dot(trans, src_pt)
     return dst_pt[0:2]
-
-

@@ -7,13 +7,13 @@ import abc
 from torch.utils.data import DataLoader
 import torch.optim
 import torchvision.transforms as transforms
-
-from config import cfg
-from dataset import DatasetLoader
 from timer import Timer
 from logger import colorlogger
 from torch.nn.parallel.data_parallel import DataParallel
+from config import cfg
 from model import get_pose_net
+from dataset import DatasetLoader
+from multiple_datasets import MultipleDatasets
 
 # dynamic dataset import
 for i in range(len(cfg.trainset)):
@@ -89,8 +89,6 @@ class Trainer(Base):
         # data load and construct batch generator
         self.logger.info("Creating dataset...")
         trainset_loader = []
-        batch_generator = []
-        iterator = []
         for i in range(len(cfg.trainset)):
             if i > 0:
                 ref_joints_name = trainset_loader[0].joints_name
@@ -100,14 +98,12 @@ class Trainer(Base):
                                                                                                         transforms.ToTensor(),
                                                                                                         transforms.Normalize(mean=cfg.pixel_mean, std=cfg.pixel_std)]\
                                                                                                         )))
-            batch_generator.append(DataLoader(dataset=trainset_loader[-1], batch_size=cfg.num_gpus*cfg.batch_size//len(cfg.trainset), shuffle=True, num_workers=cfg.num_thread, pin_memory=True))
-            iterator.append(iter(batch_generator[-1]))
-        
         self.joint_num = trainset_loader[0].joint_num
-        self.itr_per_epoch = math.ceil(trainset_loader[0].__len__() / cfg.num_gpus / (cfg.batch_size // len(cfg.trainset)))
-        self.batch_generator = batch_generator
-        self.iterator = iterator
-    
+
+        trainset_loader = MultipleDatasets(trainset_loader)
+        self.itr_per_epoch = math.ceil(len(trainset_loader) / cfg.num_gpus / cfg.batch_size)
+        self.batch_generator = DataLoader(dataset=trainset_loader, batch_size=cfg.num_gpus*cfg.batch_size, shuffle=True, num_workers=cfg.num_thread, pin_memory=True)
+   
     def _make_model(self):
         # prepare network
         self.logger.info("Creating graph and optimizer...")
