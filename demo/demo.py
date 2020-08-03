@@ -15,6 +15,7 @@ sys.path.insert(0, osp.join('..', 'common'))
 from config import cfg
 from model import get_pose_net
 from dataset import generate_patch_image
+from utils.pose_utils import process_bbox
 from utils.vis import vis_keypoints, vis_3d_skeleton
 
 def parse_args():
@@ -72,6 +73,7 @@ img = cv2.imread(img_path)
 
 # prepare bbox
 bbox = [164, 93, 222, 252] # xmin, ymin, width, height
+bbox = process_bbox(bbox, img.shape[1], img.shape[0])
 assert len(bbox) == 4, 'Please set bbox'
 img, img2bb_trans = generate_patch_image(img, bbox, False, 1.0, 0.0, False) 
 img = transform(img).cuda()[None,:,:,:]
