@@ -70,7 +70,7 @@ transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize(mean
 img_path = 'input.jpg'
 img = cv2.imread(img_path)
 
-# prepare bbox and focal lengths
+# prepare bbox
 bbox = [164, 93, 222, 252] # xmin, ymin, width, height
 assert len(bbox) == 4, 'Please set bbox'
 img, img2bb_trans = generate_patch_image(img, bbox, False, 1.0, 0.0, False) 
