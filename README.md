@@ -42,7 +42,7 @@ You can try quick demo at `demo` folder.
 * Prepare `input.jpg` and pre-trained snapshot at `demo` folder.
 * Run `python demo.py --gpu 0 --test_epoch 24` if you want to run on gpu 0 and use `snapshot_24.pth.tar`.
 * You can see `output_pose_2d.jpg` and new window that shows 3D pose.
-* **Note that the x- and y-axis of the output 3D pose are in image space (pixel). You can do camera-backprojection to make them milimeter by supplying focal lengths at line 104~115.** 
+* **Note that the x- and y-axis of the output 3D pose are in image space (pixel). You can do camera-backprojection to make them milimeter by supplying root depth, focal lengths, and princpts at line 104~115. To obtain them, please use [demo of RootNet](https://github.com/mks0601/3DMPPE_ROOTNET_RELEASE/tree/master/demo).** 
 
 
 ## Directory
@@ -158,8 +158,9 @@ python test.py --gpu 0-1 --test_epoch 20
 to test the network on the GPU 0,1 with 20th epoch trained model. `--gpu 0,1` can be used instead of `--gpu 0-1`.
 
 ## Results
-Here I report the performance of the PoseNet. Also, you can download pre-trained models of the PoseNetNet in [here](https://drive.google.com/drive/folders/1UOfSrC2_PGkBXALP3pda5sYqRoG7eFxF?usp=sharing) and bounding boxs (from DetectNet) and root joint coordintates (from RootNet) of Human3.6M, MSCOCO, and MuPoTS-3D dataset in [here](https://drive.google.com/drive/folders/1oPugnYuxPnVSKtxpGQuzJKimhq7PtX_M?usp=sharing).
-
+Here I report the performance of the PoseNet. 
+* Download pre-trained models of the PoseNetNet in [here](https://drive.google.com/drive/folders/1UOfSrC2_PGkBXALP3pda5sYqRoG7eFxF?usp=sharing) 
+* Bounding boxs (from DetectNet) and root joint coordintates (from RootNet) of Human3.6M, MSCOCO, and MuPoTS-3D dataset in [here](https://drive.google.com/drive/folders/1oPugnYuxPnVSKtxpGQuzJKimhq7PtX_M?usp=sharing).
 
 #### Human3.6M dataset using protocol 1
 For the evaluation, you can run `test.py` or there are evaluation codes in `Human36M`.
