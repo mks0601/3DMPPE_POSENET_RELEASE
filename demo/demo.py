@@ -15,7 +15,7 @@ sys.path.insert(0, osp.join('..', 'common'))
 from config import cfg
 from model import get_pose_net
 from dataset import generate_patch_image
-from utils.pose_utils import process_bbox
+from utils.pose_utils import process_bbox, pixel2cam
 from utils.vis import vis_keypoints, vis_3d_skeleton
 
 def parse_args():
@@ -81,20 +81,36 @@ img = transform(img).cuda()[None,:,:,:]
 # forward
 with torch.no_grad():
     pose_3d = model(img) # x,y: pixel, z: root-relative depth (mm)
- 
+
+img = img[0].cpu().numpy()
+pose_3d = pose_3d[0].cpu().numpy()
+
 # save output in 2D space (x,y: pixel)
-vis_img = img[0].cpu().numpy()
+vis_img = img.copy()
 vis_img = vis_img * np.array(cfg.pixel_std).reshape(3,1,1) + np.array(cfg.pixel_mean).reshape(3,1,1)
 vis_img = vis_img.astype(np.uint8)
 vis_img = vis_img[::-1, :, :]
 vis_img = np.transpose(vis_img,(1,2,0)).copy()
 vis_kps = np.zeros((3,joint_num))
-vis_kps[:2,:] = pose_3d[0,:,:2].cpu().numpy().transpose(1,0) / cfg.output_shape[0] * cfg.input_shape[0]
+vis_kps[:2,:] = pose_3d[:,:2].transpose(1,0) / cfg.output_shape[0] * cfg.input_shape[0]
 vis_kps[2,:] = 1
 vis_img = vis_keypoints(vis_img, vis_kps, skeleton)
 cv2.imwrite('output_pose_2d.jpg', vis_img)
 
 # show output in 3D space (x,y: pixel, z: root-relative depth (mm))
-vis_kps = pose_3d[0].cpu().numpy()
+vis_kps = pose_3d.copy()
 vis_3d_skeleton(vis_kps, np.ones_like(vis_kps), skeleton, 'output_pose_3d')
-   
+
+# camera back-projection
+root_depth = None # root joint depth (mm). please provide this
+focal = (None, None) # focal length of x-axis, y-axis. please provide this
+princpt = (None, None) # princical point of x-axis, y-aixs. please provide this
+# inverse affine transform (restore the crop and resize)
+pose_3d[:,0] = pose_3d[:,0] / cfg.output_shape[1] * cfg.input_shape[1]
+pose_3d[:,1] = pose_3d[:,1] / cfg.output_shape[0] * cfg.input_shape[0]
+pose_3d_xy1 = np.concatenate((pose_3d[:,:2], np.ones_like(pose_3d[:,:1])),1)
+pose_3d[:,:2] = np.dot(np.linalg.inv(img2bb_trans), pose_3d_xy1.transpose(1,0)).transpose(1,0)
+# root-relative discretized depth -> absolute continuous depth
+pose_3d[:,2] = (pose_3d[:,2] / cfg.depth_dim * 2 - 1) * (cfg.bbox_3d_shape[0]/2) + root_depth
+pose_3d = pixel2cam(pose_3d, focal, princpt)
+
