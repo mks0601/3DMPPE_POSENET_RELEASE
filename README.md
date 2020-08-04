@@ -14,15 +14,6 @@
 <img src="https://drive.google.com/uc?export=view&id=1Zu3DsFFicF5pSHz6E8kjci5EMCFpYynL" width="200" height="150"> <img src="https://drive.google.com/uc?export=view&id=1RCICK5uqPvB5RoOoumk-_K49StNHbedK" width="200" height="150"><img src="https://drive.google.com/uc?export=view&id=1O78xtfrptIfpsr1UBrc0b_DBBBzxxSvm" width="200" height="150"> <img src="https://drive.google.com/uc?export=view&id=1cknrd9h8HEvIhhyOa93KYbExi6kGurhK" width="200" height="150">
 </p>
 
-## News
-All download links are replaced with Google drive link. Sorry for slow and unstable previous links.
-If you have a problem with 'Download limit' problem when tried to download dataset from google drive link, please try this trick.
-```
-* Go the shared folder, which contains files you want to copy to your drive
-* Select all the files you want to copy
-* In the upper right corner click on three vertical dots and select “make a copy”
-* Then, the file is copied to your personal google drive account. You can download it from your personal account.
-```
 
 ## Introduction
 
@@ -44,6 +35,15 @@ This repo is official **[PyTorch](https://pytorch.org)** implementation of **[Ca
 This code is tested under Ubuntu 16.04, CUDA 9.0, cuDNN 7.1 environment with two NVIDIA 1080Ti GPUs.
 
 Python 3.6.5 version with Anaconda 3 is used for development.
+
+## Quick demo
+You can try quick demo at `demo` folder. 
+* Download the pre-trained PoseNet in [here](https://drive.google.com/drive/folders/1UOfSrC2_PGkBXALP3pda5sYqRoG7eFxF?usp=sharing). You can use any pre-trained model, but should adjust the joinst set definition at line 45~57. For example, if you want to use PoseNet trained on H36M+MPII, you should comment out `MuCo joint set` part.  
+* Prepare `input.jpg` and pre-trained snapshot at `demo` folder.
+* Run `python demo.py --gpu 0 --test_epoch 24` if you want to run on gpu 0 and use `snapshot_24.pth.tar`.
+* You can see `output_pose_2d.jpg` and new window that shows 3D pose.
+* **Note that the x- and y-axis of the output 3D pose are in image space (pixel). You can do camera-backprojection to make them milimeter by supplying focal lengths at line 104~115.** 
+
 
 ## Directory
 
@@ -101,6 +101,15 @@ ${POSE_ROOT}
 * Download MuPoTS parsed data [[images](http://gvv.mpi-inf.mpg.de/projects/SingleShotMultiPerson/)][[annotations](https://drive.google.com/drive/folders/1WmfQ8UEj6nuamMfAdkxmrNcsQTrTfKK_?usp=sharing)]
 * All annotation files follow [MS COCO format](http://cocodataset.org/#format-data).
 * If you want to add your own dataset, you have to convert it to [MS COCO format](http://cocodataset.org/#format-data).
+
+If you have a problem with 'Download limit' problem when tried to download dataset from google drive link, please try this trick.
+```
+* Go the shared folder, which contains files you want to copy to your drive
+* Select all the files you want to copy
+* In the upper right corner click on three vertical dots and select “make a copy”
+* Then, the file is copied to your personal google drive account. You can download it from your personal account.
+```
+
 ### Output
 You need to follow the directory structure of the `output` folder as below.
 ```
