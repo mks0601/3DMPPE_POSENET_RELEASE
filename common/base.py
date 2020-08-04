@@ -16,8 +16,10 @@ from dataset import DatasetLoader
 from multiple_datasets import MultipleDatasets
 
 # dynamic dataset import
-for i in range(len(cfg.trainset)):
-    exec('from ' + cfg.trainset[i] + ' import ' + cfg.trainset[i])
+for i in range(len(cfg.trainset_3d)):
+    exec('from ' + cfg.trainset_3d[i] + ' import ' + cfg.trainset_3d[i])
+for i in range(len(cfg.trainset_2d)):
+    exec('from ' + cfg.trainset_2d[i] + ' import ' + cfg.trainset_2d[i])
 exec('from ' + cfg.testset + ' import ' + cfg.testset)
 
 class Base(object):
@@ -88,19 +90,30 @@ class Trainer(Base):
     def _make_batch_generator(self):
         # data load and construct batch generator
         self.logger.info("Creating dataset...")
-        trainset_loader = []
-        for i in range(len(cfg.trainset)):
+        trainset3d_loader = []
+        for i in range(len(cfg.trainset_3d)):
             if i > 0:
-                ref_joints_name = trainset_loader[0].joints_name
+                ref_joints_name = trainset3d_loader[0].joints_name
             else:
                 ref_joints_name = None
-            trainset_loader.append(DatasetLoader(eval(cfg.trainset[i])("train"), ref_joints_name, True, transforms.Compose([\
+            trainset3d_loader.append(DatasetLoader(eval(cfg.trainset_3d[i])("train"), ref_joints_name, True, transforms.Compose([\
                                                                                                         transforms.ToTensor(),
                                                                                                         transforms.Normalize(mean=cfg.pixel_mean, std=cfg.pixel_std)]\
                                                                                                         )))
-        self.joint_num = trainset_loader[0].joint_num
+        ref_joints_name = trainset3d_loader[0].joints_name
+        trainset2d_loader = []
+        for i in range(len(cfg.trainset_2d)):
+            trainset2d_loader.append(DatasetLoader(eval(cfg.trainset_2d[i])("train"), ref_joints_name, True, transforms.Compose([\
+                                                                                                        transforms.ToTensor(),
+                                                                                                        transforms.Normalize(mean=cfg.pixel_mean, std=cfg.pixel_std)]\
+                                                                                                        )))
 
-        trainset_loader = MultipleDatasets(trainset_loader)
+        self.joint_num = trainset3d_loader[0].joint_num
+
+        trainset3d_loader = MultipleDatasets(trainset3d_loader, make_same_len=False)
+        trainset2d_loader = MultipleDatasets(trainset2d_loader, make_same_len=False)
+        trainset_loader = MultipleDatasets([trainset3d_loader, trainset2d_loader], make_same_len=True)
+
         self.itr_per_epoch = math.ceil(len(trainset_loader) / cfg.num_gpus / cfg.batch_size)
         self.batch_generator = DataLoader(dataset=trainset_loader, batch_size=cfg.num_gpus*cfg.batch_size, shuffle=True, num_workers=cfg.num_thread, pin_memory=True)
    

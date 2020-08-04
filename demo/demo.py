@@ -111,7 +111,8 @@ princpt = (None, None) # princical point of x-axis, y-aixs. please provide this
 pose_3d[:,0] = pose_3d[:,0] / cfg.output_shape[1] * cfg.input_shape[1]
 pose_3d[:,1] = pose_3d[:,1] / cfg.output_shape[0] * cfg.input_shape[0]
 pose_3d_xy1 = np.concatenate((pose_3d[:,:2], np.ones_like(pose_3d[:,:1])),1)
-pose_3d[:,:2] = np.dot(np.linalg.inv(img2bb_trans), pose_3d_xy1.transpose(1,0)).transpose(1,0)
+img2bb_trans_001 = np.concatenate((img2bb_trans, np.array([0,0,1]).reshape(1,3)))
+pose_3d[:,:2] = np.dot(np.linalg.inv(img2bb_trans_001), pose_3d_xy1.transpose(1,0)).transpose(1,0)[:,:2]
 # root-relative discretized depth -> absolute continuous depth
 pose_3d[:,2] = (pose_3d[:,2] / cfg.depth_dim * 2 - 1) * (cfg.bbox_3d_shape[0]/2) + root_depth
 pose_3d = pixel2cam(pose_3d, focal, princpt)
