@@ -100,13 +100,16 @@ cv2.imwrite('output_pose_2d.jpg', vis_img)
 
 # show output in 3D space (x,y: pixel, z: root-relative depth (mm))
 vis_kps = pose_3d.copy()
-vis_3d_skeleton(vis_kps, np.ones_like(vis_kps), skeleton, 'output_pose_3d')
+vis_3d_skeleton(vis_kps, np.ones_like(vis_kps), skeleton, 'output_pose_3d (x,y: pixel, z: root-relative depth)')
 
 # camera back-projection
 # if you do not know root_depth, focal, and princpt, visit https://github.com/mks0601/3DMPPE_ROOTNET_RELEASE/tree/master/demo
 root_depth = None # root joint depth (mm). please provide this
 focal = (None, None) # focal length of x-axis, y-axis. please provide this
 princpt = (None, None) # princical point of x-axis, y-aixs. please provide this
+assert root_depth is not None, 'Please set root_depth'
+assert None not in focal, 'Please set focal length'
+assert None not in princpt, 'Please set princpt'
 # inverse affine transform (restore the crop and resize)
 pose_3d[:,0] = pose_3d[:,0] / cfg.output_shape[1] * cfg.input_shape[1]
 pose_3d[:,1] = pose_3d[:,1] / cfg.output_shape[0] * cfg.input_shape[0]
@@ -116,4 +119,8 @@ pose_3d[:,:2] = np.dot(np.linalg.inv(img2bb_trans_001), pose_3d_xy1.transpose(1,
 # root-relative discretized depth -> absolute continuous depth
 pose_3d[:,2] = (pose_3d[:,2] / cfg.depth_dim * 2 - 1) * (cfg.bbox_3d_shape[0]/2) + root_depth
 pose_3d = pixel2cam(pose_3d, focal, princpt)
+
+# show output in 3D space (x,y,z: camera-centered. mm)
+vis_kps = pose_3d.copy()
+vis_3d_skeleton(vis_kps, np.ones_like(vis_kps), skeleton, 'output_pose_3d (x,y,z: camera-centered)')
 
