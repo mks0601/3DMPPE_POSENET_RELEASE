@@ -103,6 +103,7 @@ vis_kps = pose_3d.copy()
 vis_3d_skeleton(vis_kps, np.ones_like(vis_kps), skeleton, 'output_pose_3d')
 
 # camera back-projection
+# if you do not know root_depth, focal, and princpt, visit https://github.com/mks0601/3DMPPE_ROOTNET_RELEASE/tree/master/demo
 root_depth = None # root joint depth (mm). please provide this
 focal = (None, None) # focal length of x-axis, y-axis. please provide this
 princpt = (None, None) # princical point of x-axis, y-aixs. please provide this
