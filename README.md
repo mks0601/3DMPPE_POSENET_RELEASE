@@ -72,32 +72,32 @@ You need to follow directory structure of the `data` as below.
 ```
 ${POSE_ROOT}
 |-- data
-|-- |-- Human36M
-|   `-- |-- bbox_root
-|       |   |-- bbox_root_human36m_output.json
-|       |-- images
-|       `-- annotations
-|-- |-- MPII
-|   `-- |-- images
-|       `-- annotations
-|-- |-- MSCOCO
-|   `-- |-- bbox_root
-|       |   |-- bbox_root_coco_output.json
-|       |-- images
-|       |   |-- train/
-|       |   |-- val/
-|       `-- annotations
-|-- |-- MuCo
-|   `-- |-- data
-|       |   |-- augmented_set
-|       |   |-- unaugmented_set
-|       |   `-- MuCo-3DHP.json
-`-- |-- MuPoTS
-|   `-- |-- bbox_root
-|       |   |-- bbox_mupots_output.json
-|       |-- data
-|       |   |-- MultiPersonTestSet
-|       |   `-- MuPoTS-3D.json
+|   |-- Human36M
+|   |   |-- bbox_root
+|   |   |   |-- bbox_root_human36m_output.json
+|   |   |-- images
+|   |   |-- annotations
+|   |-- MPII
+|   |   |-- images
+|   |   |-- annotations
+|   |-- MSCOCO
+|   |   |-- bbox_root
+|   |   |   |-- bbox_root_coco_output.json
+|   |   |-- images
+|   |   |   |-- train2017
+|   |   |   |-- val2017
+|   |   |-- annotations
+|   |-- MuCo
+|   |   |-- data
+|   |   |   |-- augmented_set
+|   |   |   |-- unaugmented_set
+|   |   |   |-- MuCo-3DHP.json
+|   |-- MuPoTS
+|   |   |-- bbox_root
+|   |   |   |-- bbox_mupots_output.json
+|   |   |-- data
+|   |   |   |-- MultiPersonTestSet
+|   |   |   |-- MuPoTS-3D.json
 ```
 * Download Human3.6M parsed data [[data](https://drive.google.com/drive/folders/1kgVH-GugrLoc9XyvP6nRoaFpw3TmM5xK?usp=sharing)]
 * Download MPII parsed data [[images](http://human-pose.mpi-inf.mpg.de/)][[annotations](https://drive.google.com/drive/folders/1MmQ2FRP0coxHGk0Ntj0JOGv9OxSNuCfK?usp=sharing)]
