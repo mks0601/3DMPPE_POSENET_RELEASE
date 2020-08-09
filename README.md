@@ -169,19 +169,19 @@ Here I report the performance of the PoseNet.
 #### Human3.6M dataset using protocol 1
 For the evaluation, you can run `test.py` or there are evaluation codes in `Human36M`.
 <p align="center">
-<img src="https://cv.snu.ac.kr/research/3DMPPE/figs/H36M_P1.png">
+<img src="https://drive.google.com/uc?export=view&id=1gaOwgm93CahWaIO3wEKchcl4i41i6lZ0">
 </p>
 
 #### Human3.6M dataset using protocol 2
 For the evaluation, you can run `test.py` or there are evaluation codes in `Human36M`.
 <p align="center">
-<img src="https://cv.snu.ac.kr/research/3DMPPE/figs/H36M_P2.png">
+<img src="https://drive.google.com/uc?export=view&id=1KkyTyKdm4rkJVHhjXPyIxl-bwLifNZPo">
 </p>
 
 #### MuPoTS-3D dataset
 For the evaluation, run `test.py`.  After that, move `data/MuPoTS/mpii_mupots_multiperson_eval.m` in `data/MuPoTS/data`. Also, move the test result files (`preds_2d_kpt_mupots.mat` and `preds_3d_kpt_mupots.mat`) in `data/MuPoTS/data`. Then run `mpii_mupots_multiperson_eval.m` with your evaluation mode arguments.
 <p align="center">
-<img src="https://cv.snu.ac.kr/research/3DMPPE/figs/MuPoTS.png">
+<img src="https://drive.google.com/uc?export=view&id=11ISH6crh7wDrk4unBd6PIilPK6-2qw74">
 </p>
 
 #### MSCOCO dataset
