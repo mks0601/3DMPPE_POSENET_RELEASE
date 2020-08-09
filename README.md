@@ -52,14 +52,18 @@ The `${POSE_ROOT}` is described as below.
 ```
 ${POSE_ROOT}
 |-- data
+|-- demo
 |-- common
 |-- main
+|-- tool
 |-- vis
 `-- output
 ```
 * `data` contains data loading codes and soft links to images and annotations directories.
+* `demo` contains demo codes.
 * `common` contains kernel codes for 3d multi-person pose estimation system.
 * `main` contains high-level codes for training or testing the network.
+* `tool` contains data pre-processing codes. You don't have to run this code. I provide pre-processed data below.
 * `vis` contains scripts for 3d visualization.
 * `output` contains log, trained models, visualized outputs, and test result.
 
