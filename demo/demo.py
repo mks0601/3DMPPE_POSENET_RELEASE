@@ -93,7 +93,7 @@ vis_img = vis_img[::-1, :, :]
 vis_img = np.transpose(vis_img,(1,2,0)).copy()
 vis_kps = np.zeros((3,joint_num))
 vis_kps[0,:] = pose_3d[:,0] / cfg.output_shape[1] * cfg.input_shape[1]
-vis_kps[1,:] = pose_3d[:,1] / cfg.output_shape[0] * cfg.input_shape[1]
+vis_kps[1,:] = pose_3d[:,1] / cfg.output_shape[0] * cfg.input_shape[0]
 vis_kps[2,:] = 1
 vis_img = vis_keypoints(vis_img, vis_kps, skeleton)
 cv2.imwrite('output_pose_2d.jpg', vis_img)
