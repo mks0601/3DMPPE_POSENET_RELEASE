@@ -16,7 +16,7 @@ from config import cfg
 from model import get_pose_net
 from dataset import generate_patch_image
 from utils.pose_utils import process_bbox, pixel2cam
-from utils.vis import vis_keypoints, vis_3d_skeleton
+from utils.vis import vis_keypoints, vis_3d_multiple_skeleton
 
 def parse_args():
     parser = argparse.ArgumentParser()
@@ -61,58 +61,63 @@ model.eval()
 # prepare input image
 transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize(mean=cfg.pixel_mean, std=cfg.pixel_std)])
 img_path = 'input.jpg'
-img = cv2.imread(img_path)
+original_img = cv2.imread(img_path)
+original_img_height, original_img_width = original_img.shape[:2]
 
 # prepare bbox
-bbox = [164, 93, 222, 252] # xmin, ymin, width, height
-bbox = process_bbox(bbox, img.shape[1], img.shape[0])
-assert len(bbox) == 4, 'Please set bbox'
-img, img2bb_trans = generate_patch_image(img, bbox, False, 1.0, 0.0, False) 
-img = transform(img).cuda()[None,:,:,:]
+bbox_list = [
+[139.41, 102.25, 222.39, 241.57],\
+[287.17, 61.52, 74.88, 165.61],\
+[540.04, 48.81, 99.96, 223.36],\
+[372.58, 170.84, 266.63, 217.19],\
+[0.5, 43.74, 90.1, 220.09]] # xmin, ymin, width, height
+root_depth_list = [11250.5732421875, 15522.8701171875, 11831.3828125, 8852.556640625, 12572.5966796875] # obtain this from RootNet (https://github.com/mks0601/3DMPPE_ROOTNET_RELEASE/tree/master/demo)
+assert len(bbox_list) == len(root_depth_list)
+person_num = len(bbox_list)
 
-# forward
-with torch.no_grad():
-    pose_3d = model(img) # x,y: pixel, z: root-relative depth (mm)
+# normalized camera intrinsics
+focal = [1500, 1500] # x-axis, y-axis
+princpt = [original_img_width/2, original_img_height/2] # x-axis, y-axis
+print('focal length: (' + str(focal[0]) + ', ' + str(focal[1]) + ')')
+print('principal points: (' + str(princpt[0]) + ', ' + str(princpt[1]) + ')')
 
-img = img[0].cpu().numpy()
-pose_3d = pose_3d[0].cpu().numpy()
+# for each cropped and resized human image, forward it to PoseNet
+output_pose_2d_list = []
+output_pose_3d_list = []
+for n in range(person_num):
+    bbox = process_bbox(np.array(bbox_list[n]), original_img_width, original_img_height)
+    assert len(bbox) == 4, 'Please set bbox'
+    img, img2bb_trans = generate_patch_image(original_img, bbox, False, 1.0, 0.0, False) 
+    img = transform(img).cuda()[None,:,:,:]
 
-# save output in 2D space (x,y: pixel)
-vis_img = img.copy()
-vis_img = vis_img * np.array(cfg.pixel_std).reshape(3,1,1) + np.array(cfg.pixel_mean).reshape(3,1,1)
-vis_img = vis_img.astype(np.uint8)
-vis_img = vis_img[::-1, :, :]
-vis_img = np.transpose(vis_img,(1,2,0)).copy()
-vis_kps = np.zeros((3,joint_num))
-vis_kps[0,:] = pose_3d[:,0] / cfg.output_shape[1] * cfg.input_shape[1]
-vis_kps[1,:] = pose_3d[:,1] / cfg.output_shape[0] * cfg.input_shape[0]
-vis_kps[2,:] = 1
-vis_img = vis_keypoints(vis_img, vis_kps, skeleton)
+    # forward
+    with torch.no_grad():
+        pose_3d = model(img) # x,y: pixel, z: root-relative depth (mm)
+
+    # inverse affine transform (restore the crop and resize)
+    pose_3d = pose_3d[0].cpu().numpy()
+    pose_3d[:,0] = pose_3d[:,0] / cfg.output_shape[1] * cfg.input_shape[1]
+    pose_3d[:,1] = pose_3d[:,1] / cfg.output_shape[0] * cfg.input_shape[0]
+    pose_3d_xy1 = np.concatenate((pose_3d[:,:2], np.ones_like(pose_3d[:,:1])),1)
+    img2bb_trans_001 = np.concatenate((img2bb_trans, np.array([0,0,1]).reshape(1,3)))
+    pose_3d[:,:2] = np.dot(np.linalg.inv(img2bb_trans_001), pose_3d_xy1.transpose(1,0)).transpose(1,0)[:,:2]
+    output_pose_2d_list.append(pose_3d[:,:2].copy())
+    
+    # root-relative discretized depth -> absolute continuous depth
+    pose_3d[:,2] = (pose_3d[:,2] / cfg.depth_dim * 2 - 1) * (cfg.bbox_3d_shape[0]/2) + root_depth_list[n]
+    pose_3d = pixel2cam(pose_3d, focal, princpt)
+    output_pose_3d_list.append(pose_3d.copy())
+
+# visualize 2d poses
+vis_img = original_img.copy()
+for n in range(person_num):
+    vis_kps = np.zeros((3,joint_num))
+    vis_kps[0,:] = output_pose_2d_list[n][:,0]
+    vis_kps[1,:] = output_pose_2d_list[n][:,1]
+    vis_kps[2,:] = 1
+    vis_img = vis_keypoints(vis_img, vis_kps, skeleton)
 cv2.imwrite('output_pose_2d.jpg', vis_img)
 
-# show output in 3D space (x,y: pixel, z: root-relative depth (mm))
-vis_kps = pose_3d.copy()
-vis_3d_skeleton(vis_kps, np.ones_like(vis_kps), skeleton, 'output_pose_3d (x,y: pixel, z: root-relative depth)')
-
-# camera back-projection
-# if you do not know root_depth, focal, and princpt, visit https://github.com/mks0601/3DMPPE_ROOTNET_RELEASE/tree/master/demo
-root_depth = None # root joint depth (mm). please provide this
-focal = (None, None) # focal length of x-axis, y-axis. please provide this
-princpt = (None, None) # princical point of x-axis, y-aixs. please provide this
-assert root_depth is not None, 'Please set root_depth'
-assert None not in focal, 'Please set focal length'
-assert None not in princpt, 'Please set princpt'
-# inverse affine transform (restore the crop and resize)
-pose_3d[:,0] = pose_3d[:,0] / cfg.output_shape[1] * cfg.input_shape[1]
-pose_3d[:,1] = pose_3d[:,1] / cfg.output_shape[0] * cfg.input_shape[0]
-pose_3d_xy1 = np.concatenate((pose_3d[:,:2], np.ones_like(pose_3d[:,:1])),1)
-img2bb_trans_001 = np.concatenate((img2bb_trans, np.array([0,0,1]).reshape(1,3)))
-pose_3d[:,:2] = np.dot(np.linalg.inv(img2bb_trans_001), pose_3d_xy1.transpose(1,0)).transpose(1,0)[:,:2]
-# root-relative discretized depth -> absolute continuous depth
-pose_3d[:,2] = (pose_3d[:,2] / cfg.depth_dim * 2 - 1) * (cfg.bbox_3d_shape[0]/2) + root_depth
-pose_3d = pixel2cam(pose_3d, focal, princpt)
-
-# show output in 3D space (x,y,z: camera-centered. mm)
-vis_kps = pose_3d.copy()
-vis_3d_skeleton(vis_kps, np.ones_like(vis_kps), skeleton, 'output_pose_3d (x,y,z: camera-centered)')
-
+# visualize 3d poses
+vis_kps = np.array(output_pose_3d_list)
+vis_3d_multiple_skeleton(vis_kps, np.ones_like(vis_kps), skeleton, 'output_pose_3d (x,y,z: camera-centered. mm.)')
