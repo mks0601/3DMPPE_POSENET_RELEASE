@@ -42,8 +42,6 @@ You can try quick demo at `demo` folder.
 * Prepare `input.jpg` and pre-trained snapshot at `demo` folder.
 * Run `python demo.py --gpu 0 --test_epoch 24` if you want to run on gpu 0.
 * You can see `output_pose_2d.jpg` and new window that shows 3D pose.
-* **Note that the x- and y-axis of the output 3D pose are in image space (pixel). You can do camera-backprojection to make them milimeter by supplying root depth, focal lengths, and princpts at line 97~113. To obtain them, please use [demo of RootNet](https://github.com/mks0601/3DMPPE_ROOTNET_RELEASE/tree/master/demo).** 
-
 
 ## Directory
 
