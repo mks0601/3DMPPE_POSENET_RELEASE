@@ -86,7 +86,6 @@ output_pose_2d_list = []
 output_pose_3d_list = []
 for n in range(person_num):
     bbox = process_bbox(np.array(bbox_list[n]), original_img_width, original_img_height)
-    assert len(bbox) == 4, 'Please set bbox'
     img, img2bb_trans = generate_patch_image(original_img, bbox, False, 1.0, 0.0, False) 
     img = transform(img).cuda()[None,:,:,:]
 
