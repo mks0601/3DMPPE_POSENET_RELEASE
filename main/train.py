@@ -11,12 +11,12 @@ def parse_args():
     args = parser.parse_args()
 
     if not args.gpu_ids:
-        assert 0, print("Please set proper gpu ids")
+        assert 0, "Please set proper gpu ids"
 
     if '-' in args.gpu_ids:
         gpus = args.gpu_ids.split('-')
-        gpus[0] = 0 if not gpus[0].isdigit() else int(gpus[0])
-        gpus[1] = len(mem_info()) if not gpus[1].isdigit() else int(gpus[1]) + 1
+        gpus[0] = int(gpus[0])
+        gpus[1] = int(gpus[1]) + 1
         args.gpu_ids = ','.join(map(lambda x: str(x), list(range(*gpus))))
 
     return args
