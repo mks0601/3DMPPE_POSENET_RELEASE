@@ -41,6 +41,7 @@ You can try quick demo at `demo` folder.
 * Download the pre-trained PoseNet in [here](https://drive.google.com/drive/folders/1SKzmLk21mo3o24q_eB-4z7t1Sa9ozJ80?usp=sharing).
 * Prepare `input.jpg` and pre-trained snapshot at `demo` folder.
 * Set `bbox_list` at [here](https://github.com/mks0601/3DMPPE_POSENET_RELEASE/blob/f8d420895570682c815d37ea74e2d6b1bf646818/demo/demo.py#L68).
+* Set `root_depth_list` at [here](https://github.com/mks0601/3DMPPE_POSENET_RELEASE/blob/bf4fa6f8076fcd3f636ddcc31479e2becbba19ec/demo/demo.py#L74).
 * Run `python demo.py --gpu 0 --test_epoch 24` if you want to run on gpu 0.
 * You can see `output_pose_2d.jpg` and new window that shows 3D pose.
 
