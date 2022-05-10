@@ -8,7 +8,7 @@ import json
 import cv2
 import random
 import math
-from utils.pose_utils import pixel2cam
+from utils.pose_utils import pixel2cam, process_bbox
 from utils.vis import vis_keypoints, vis_3d_skeleton
 
 
