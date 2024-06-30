@@ -93,21 +93,12 @@ ${POSE_ROOT}
 |   |   |   |-- MultiPersonTestSet
 |   |   |   |-- MuPoTS-3D.json
 ```
-* Download Human3.6M parsed data [[data](https://drive.google.com/drive/folders/1r0B9I3XxIIW_jsXjYinDpL6NFcxTZart?usp=sharing)]
-* Download MPII parsed data [[images](http://human-pose.mpi-inf.mpg.de/)][[annotations](https://drive.google.com/drive/folders/1rrL_RxhwQgwhq5BU1iIRPwl285B_KTpU?usp=sharing)]
-* Download MuCo parsed and composited data [[data](https://drive.google.com/drive/folders/1dfhFa1kBHYKLTKuprNc7xixt3yyKEky5?usp=sharing)]
-* Download MuPoTS parsed data [[images](http://gvv.mpi-inf.mpg.de/projects/SingleShotMultiPerson/)][[annotations](https://drive.google.com/file/d/1wZ_QdqDzYqz1Lh4Yqf_-dSC568CFnfA0/view?usp=sharing)]
+* Download Human3.6M parsed data [[data](https://1drv.ms/f/s!All7gdNh7XE5kGrEdXkTKN3qWOmg?e=iVFqby)]
+* Download MPII parsed data [[images](http://human-pose.mpi-inf.mpg.de/)][[annotations](https://1drv.ms/f/s!All7gdNh7XE5lhxh0Mmwlvk8jwkP?e=HuyjNS)]
+* Download MuCo parsed and composited data [[data](https://1drv.ms/f/s!All7gdNh7XE5kRnWfDfIeZ9uOeS9?e=IJDlp2)]
+* Download MuPoTS parsed data [[images](http://gvv.mpi-inf.mpg.de/projects/SingleShotMultiPerson/)][[annotations](https://1drv.ms/u/s!All7gdNh7XE5lmrqHHis95WMM9c3?e=1nhiUX)]
 * All annotation files follow [MS COCO format](http://cocodataset.org/#format-data).
 * If you want to add your own dataset, you have to convert it to [MS COCO format](http://cocodataset.org/#format-data).
-
-To download multiple files from Google drive without compressing them, try [this](https://chrome.google.com/webstore/detail/drive-multiple-downloader/baolodbihgboogdhkikimhadihambecp).
-If you have a problem with 'Download limit' problem when tried to download dataset from google drive link, please try this trick.  
-```  
-* Go the shared folder, which contains files you want to copy to your drive  
-* Select all the files you want to copy  
-* In the upper right corner click on three vertical dots and select “make a copy”  
-* Then, the file is copied to your personal google drive account. You can download it from your personal account.  
-```  
 
 ### Output
 You need to follow the directory structure of the `output` folder as below.
