@@ -32,7 +32,7 @@ Python 3.6.5 version with Anaconda 3 is used for development.
 
 ## Quick demo
 You can try quick demo at `demo` folder. 
-* Download the pre-trained PoseNet in [here](https://drive.google.com/file/d/1xjefKgjsH-W8v2lVn1Hbwzp2_Su7KtG0/view?usp=sharing).
+* Download the pre-trained PoseNet in [here](https://1drv.ms/u/s!All7gdNh7XE5nwgna46wHjqgqlUU?e=gA58er).
 * Prepare `input.jpg` and pre-trained snapshot at `demo` folder.
 * Set `bbox_list` at [here](https://github.com/mks0601/3DMPPE_POSENET_RELEASE/blob/f8d420895570682c815d37ea74e2d6b1bf646818/demo/demo.py#L68).
 * Set `root_depth_list` at [here](https://github.com/mks0601/3DMPPE_POSENET_RELEASE/blob/bf4fa6f8076fcd3f636ddcc31479e2becbba19ec/demo/demo.py#L74).
@@ -149,8 +149,8 @@ to test the network on the GPU 0,1 with 20th epoch trained model. `--gpu 0,1` ca
 
 ## Results
 Here I report the performance of the PoseNet. 
-* Download pre-trained models of the PoseNetNet in [here](https://drive.google.com/drive/folders/1El3qfdtgttO90X25k_680V2UCDv_TPoJ?usp=sharing) 
-* Bounding boxs (from DetectNet) and root joint coordintates (from RootNet) of Human3.6M, MSCOCO, and MuPoTS-3D dataset in [here](https://drive.google.com/drive/folders/1bmQWFiT0ZU4Q7dlsRaPGqaqoCAOeThGr?usp=sharing).
+* Download pre-trained models of the PoseNetNet in [here](https://1drv.ms/f/s!All7gdNh7XE5nwI2VLrt7CQleoJE?e=GGpRWf) 
+* Bounding boxs (from DetectNet) and root joint coordintates (from RootNet) of Human3.6M, MSCOCO, and MuPoTS-3D dataset in [here](https://1drv.ms/f/s!All7gdNh7XE5nnCPZhAvILNurZD9?e=hcwxeJ).
 
 #### Human3.6M dataset using protocol 1
 For the evaluation, you can run `test.py` or there are evaluation codes in `Human36M`.
