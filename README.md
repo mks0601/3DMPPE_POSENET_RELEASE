@@ -32,7 +32,7 @@ Python 3.6.5 version with Anaconda 3 is used for development.
 
 ## Quick demo
 You can try quick demo at `demo` folder. 
-* Download the pre-trained PoseNet in [here](https://1drv.ms/u/s!All7gdNh7XE5nwgna46wHjqgqlUU?e=gA58er).
+* Download the pre-trained PoseNet in [here](https://drive.google.com/file/d/1xjefKgjsH-W8v2lVn1Hbwzp2_Su7KtG0/view?usp=sharing).
 * Prepare `input.jpg` and pre-trained snapshot at `demo` folder.
 * Set `bbox_list` at [here](https://github.com/mks0601/3DMPPE_POSENET_RELEASE/blob/f8d420895570682c815d37ea74e2d6b1bf646818/demo/demo.py#L68).
 * Set `root_depth_list` at [here](https://github.com/mks0601/3DMPPE_POSENET_RELEASE/blob/bf4fa6f8076fcd3f636ddcc31479e2becbba19ec/demo/demo.py#L74).
@@ -93,12 +93,21 @@ ${POSE_ROOT}
 |   |   |   |-- MultiPersonTestSet
 |   |   |   |-- MuPoTS-3D.json
 ```
-* Download Human3.6M parsed data [[data](https://1drv.ms/f/s!All7gdNh7XE5kGrEdXkTKN3qWOmg?e=iVFqby)]
-* Download MPII parsed data [[images](http://human-pose.mpi-inf.mpg.de/)][[annotations](https://1drv.ms/f/s!All7gdNh7XE5lhxh0Mmwlvk8jwkP?e=HuyjNS)]
-* Download MuCo parsed and composited data [[data](https://1drv.ms/f/s!All7gdNh7XE5kRnWfDfIeZ9uOeS9?e=IJDlp2)]
-* Download MuPoTS parsed data [[images](http://gvv.mpi-inf.mpg.de/projects/SingleShotMultiPerson/)][[annotations](https://1drv.ms/u/s!All7gdNh7XE5lmrqHHis95WMM9c3?e=1nhiUX)]
+* Download Human3.6M parsed data [[data](https://drive.google.com/drive/folders/1r0B9I3XxIIW_jsXjYinDpL6NFcxTZart?usp=sharing)]
+* Download MPII parsed data [[images](http://human-pose.mpi-inf.mpg.de/)][[annotations](https://drive.google.com/drive/folders/1rrL_RxhwQgwhq5BU1iIRPwl285B_KTpU?usp=sharing)]
+* Download MuCo parsed and composited data [[data](https://drive.google.com/drive/folders/1dfhFa1kBHYKLTKuprNc7xixt3yyKEky5?usp=sharing)]
+* Download MuPoTS parsed data [[images](http://gvv.mpi-inf.mpg.de/projects/SingleShotMultiPerson/)][[annotations](https://drive.google.com/file/d/1wZ_QdqDzYqz1Lh4Yqf_-dSC568CFnfA0/view?usp=sharing)]
 * All annotation files follow [MS COCO format](http://cocodataset.org/#format-data).
 * If you want to add your own dataset, you have to convert it to [MS COCO format](http://cocodataset.org/#format-data).
+
+To download multiple files from Google drive without compressing them, try [this](https://chrome.google.com/webstore/detail/drive-multiple-downloader/baolodbihgboogdhkikimhadihambecp).
+If you have a problem with 'Download limit' problem when tried to download dataset from google drive link, please try this trick.  
+```  
+* Go the shared folder, which contains files you want to copy to your drive  
+* Select all the files you want to copy  
+* In the upper right corner click on three vertical dots and select “make a copy”  
+* Then, the file is copied to your personal google drive account. You can download it from your personal account.  
+```  
 
 ### Output
 You need to follow the directory structure of the `output` folder as below.
@@ -149,8 +158,8 @@ to test the network on the GPU 0,1 with 20th epoch trained model. `--gpu 0,1` ca
 
 ## Results
 Here I report the performance of the PoseNet. 
-* Download pre-trained models of the PoseNetNet in [here](https://1drv.ms/f/s!All7gdNh7XE5nwI2VLrt7CQleoJE?e=GGpRWf) 
-* Bounding boxs (from DetectNet) and root joint coordintates (from RootNet) of Human3.6M, MSCOCO, and MuPoTS-3D dataset in [here](https://1drv.ms/f/s!All7gdNh7XE5nnCPZhAvILNurZD9?e=hcwxeJ).
+* Download pre-trained models of the PoseNetNet in [here](https://drive.google.com/drive/folders/1El3qfdtgttO90X25k_680V2UCDv_TPoJ?usp=sharing) 
+* Bounding boxs (from DetectNet) and root joint coordintates (from RootNet) of Human3.6M, MSCOCO, and MuPoTS-3D dataset in [here](https://drive.google.com/drive/folders/1bmQWFiT0ZU4Q7dlsRaPGqaqoCAOeThGr?usp=sharing).
 
 #### Human3.6M dataset using protocol 1
 For the evaluation, you can run `test.py` or there are evaluation codes in `Human36M`.
@@ -183,5 +192,4 @@ We additionally provide estimated 3D human root coordinates in on the MSCOCO dat
   year = {2019}
 }
 ```
-
 
